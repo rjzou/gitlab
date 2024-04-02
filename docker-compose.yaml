@@ -1,0 +1,22 @@
+# docker-compose.yml
+version: '3.7'
+services:
+  web:
+    image: 'gitlab/gitlab-ee:latest'
+    restart: always
+    hostname: '192.168.3.38'
+    container_name: gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://192.168.3.38:8929'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - '8929:8929'
+      - '2224:22'
+    volumes:
+      - '/home/rjzou/docker/gitlab/config:/etc/gitlab'
+      - '/home/rjzou/docker/gitlab/logs:/var/log/gitlab'
+      - '/home/rjzou/docker/gitlab/data:/var/opt/gitlab'
+    shm_size: '256m'
+

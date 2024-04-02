@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  gitlab-runner:
+    image: "gitlab/gitlab-runner:latest"
+    restart: always
+    privileged: true
+    volumes:
+      - "/home/rjzou/docker/gitlab-runner/config:/etc/gitlab-runner"
+      - "/var/run/docker.sock:/var/run/docker.sock"
